@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.search {
+  flex-grow: 1;
+  max-width: 400px;
+  margin: 0 20px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.navLink {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navLink:hover {
+  color: #05c0b1;
+}
+
+.navLink svg {
+  margin-right: 5px;
+}

@@ -1,0 +1,36 @@
+.homeContainer {
+  padding: 16px;
+  text-align: center;
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+  margin: 16px 0;
+}
+
+.featuredProducts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.viewAllButtonContainer {
+  margin-top: 16px;
+}
+
+.viewAllButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #05c0b1;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.viewAllButton:hover {
+  background-color: #0e8178;
+  color: white;
+}
