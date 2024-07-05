@@ -7,32 +7,52 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const result = await axios.get("https://fakestoreapi.com/products");
-      setProducts(result.data);
+      try {
+        const result = await axios.get("https://fakestoreapi.com/products");
+        setProducts(result.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
 
     const fetchCategories = async () => {
-      const result = await axios.get("https://fakestoreapi.com/products/categories");
-      setCategories(result.data);
+      try {
+        const result = await axios.get("https://fakestoreapi.com/products/categories");
+        setCategories(result.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
     };
 
     fetchProducts();
     fetchCategories();
+    setLoading(false);
   }, []);
 
   const handleCategoryChange = async (e) => {
     const category = e.target.value;
     setSelectedCategory(category);
+    setLoading(true);
     if (category) {
-      const result = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
-      setProducts(result.data);
+      try {
+        const result = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
+        setProducts(result.data);
+      } catch (error) {
+        console.error("Error fetching category products:", error);
+      }
     } else {
-      const result = await axios.get("https://fakestoreapi.com/products");
-      setProducts(result.data);
+      try {
+        const result = await axios.get("https://fakestoreapi.com/products");
+        setProducts(result.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     }
+    setLoading(false);
   };
 
   return (
@@ -47,11 +67,15 @@ const Products = () => {
           ))}
         </select>
       </div>
-      <div className={styles.grid}>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className={styles.grid}>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

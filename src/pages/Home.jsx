@@ -7,6 +7,7 @@ import banner from "../assets/banner.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -15,6 +16,8 @@ const Home = () => {
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProducts();
@@ -24,11 +27,15 @@ const Home = () => {
     <div className={styles.homeContainer}>
       <h1>Welcome to Kiyado E-commerce</h1>
       <img src={banner} alt="Kiyado Banner" className={styles.banner} />
-      <div className={styles.featuredProducts}>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className={styles.featuredProducts}>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
       <div className={styles.viewAllButtonContainer}>
         <Link to="/products" className={styles.viewAllButton}>
           View All Products
